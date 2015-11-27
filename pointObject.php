@@ -4,7 +4,7 @@ class PointObject
 {
 	var $Plastic = 0;
 	var $Glass = 0;
-	var $Biological = 0;
+	var $Organic = 0;
 	var $Tin = 0;
 	var $Paper = 0;
 	var $Chemical = 0;
@@ -17,8 +17,8 @@ class PointObject
 		if($this->Glass < 0)
 			$this->Glass = 0;
 			
-		if($this->Biological < 0)
-			$this->Biological = 0;
+		if($this->Organic < 0)
+			$this->Organic = 0;
 			
 		if($this->Tin < 0)
 			$this->Tin = 0;
@@ -38,8 +38,8 @@ class PointObject
 		if(isset($other->Glass))
 			$this->Glass += (float)$other->Glass;
 		
-		if(isset($other->Biological))
-			$this->Biological += (float)$other->Biological;
+		if(isset($other->Organic))
+			$this->Organic += (float)$other->Organic;
 		
 		if(isset($other->Tin))
 			$this->Tin += (float)$other->Tin;
@@ -59,8 +59,8 @@ class PointObject
 		if(isset($other["Glass"]))
 			$this->Glass += (float)$other["Glass"];
 		
-		if(isset($other["Biological"]))
-			$this->Biological += (float)$other["Biological"];
+		if(isset($other["Organic"]))
+			$this->Organic += (float)$other["Organic"];
 		
 		if(isset($other["Tin"]))
 			$this->Tin += (float)$other["Tin"];

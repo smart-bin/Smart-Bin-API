@@ -1,2 +1,2 @@
 <?php
-$binTypes = ["Plastic", "Organic", "Glass", "Waste"];
+$binTypes = ["Waste", "Plastic", "Glass", "Organic", "Tin", "Paper", "Chemical"];
