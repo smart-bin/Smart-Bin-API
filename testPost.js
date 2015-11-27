@@ -7,12 +7,12 @@ function init()
 	
 	console.log(obj);
 	
-	API.awardPoints(userId, obj, function(res)
+	/*API.awardPoints(userId, obj, function(res)
 	{
 		$("#result").text(res);
 		API.getUser(userId, function(data){console.log(data)});
-	});
-	//API.registerNewUser("TestmanTweeNieuw", "TestTweeLol@Testland.com", "test");
+	});*/
+	API.registerNewUser("TimsPostTest", "Post@Test.com", "test");
 	/*$.post("users.php", {newUser:{Name:'Appel', Email:"Appel@appelland.com", Password:"123"}}).done(function(data){
 		$("#result").text(data);
 	});*/

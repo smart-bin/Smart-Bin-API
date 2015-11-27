@@ -1,4 +1,6 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+
 include "databasefunctions.php";
 include_once "bintypes.php";
 include "bin.php";

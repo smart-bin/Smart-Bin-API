@@ -1,18 +1,20 @@
 var API = 
 {
-	apiBaseUrl: "http://localhost/hr/internetfornature/",
+	apiBaseUrl: "http://timfalken.com/hr/internetfornature/",
 
 	registerNewUser: function (name, email, password, onSuccess)
 	{
 		$.post(this.apiBaseUrl + "users.php", {newUser:{Name:name, Email:email, Password:password}}).done(function(data){
-			onSuccess(data);
+			if (typeof onSuccess === "function")
+				onSuccess(data);
 		});
 	},
 	
 	registerNewBin: function (ownerId, name, type, onSuccess)
 	{
 		$.post(this.apiBaseUrl + "users.php", {newBin:{Name:name, OwnerId:ownerId, Type:type}}).done(function(data){
-			onSuccess(data);
+			if (typeof onSuccess === "function")
+				onSuccess(data);
 		});
 	},
 	
@@ -24,7 +26,8 @@ var API =
 			url: this.apiBaseUrl + "users.php?id=" + userId,
 			success: function(data)
 			{
-				onSuccess(data);
+				if (typeof onSuccess === "function")
+					onSuccess(data);
 			}	
 		});
 	},
@@ -37,7 +40,8 @@ var API =
 			url: this.apiBaseUrl + "users.php",
 			success: function(data)
 			{
-				onSuccess(data);
+				if (typeof onSuccess === "function")
+					onSuccess(data);
 			}	
 		});
 	},
@@ -50,7 +54,8 @@ var API =
 			url: this.apiBaseUrl + "bins.php?id=" + binId,
 			success: function(data)
 			{
-				onSuccess(data);
+				if (typeof onSuccess === "function")
+					onSuccess(data);
 			}	
 		});
 	},
@@ -63,7 +68,8 @@ var API =
 			url: this.apiBaseUrl + "bins.php",
 			success: function(data)
 			{
-				onSuccess(data);
+				if (typeof onSuccess === "function")
+					onSuccess(data);
 			}	
 		});
 	},
@@ -71,14 +77,16 @@ var API =
 	updateBinWeight: function(id, weight, onSuccess)
 	{
 		$.post(this.apiBaseUrl + "updateBinWeight.php", {userId: id, newWeight: weight}).done(function(data){
-			onSuccess(data);
+			if (typeof onSuccess === "function")
+				onSuccess(data);
 		});
 	},
 	
 	awardPoints: function(id, pointObject, onSuccess)
 	{
 		$.post(this.apiBaseUrl + "awardPoints.php", {userId: id, points: pointObject}).done(function(data){
-			onSuccess(data);
+			if (typeof onSuccess === "function")
+				onSuccess(data);
 		});
 	}
 }
