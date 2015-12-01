@@ -36,9 +36,12 @@ if(isset($_POST["newUser"])) //Imporant: Keep same variable names as set in 'fun
 	
 	if($success)
 	{
-		RegisterNewUser($newName, $newEmail, $newPassword);
-
-		echo '{"success":"User successfully registered"}';
+		$result = RegisterNewUser($newName, $newEmail, $newPassword);
+		
+		if($result === true)
+			echo '{"success":"User successfully registered"}';
+		else
+			echo json_encode(array("Error"=>$result));
 	}
 	else
 	{
@@ -55,7 +58,10 @@ else
 		
 		for($i = 0; $i < count($usersRaw); $i++)
 		{
-			$newUser = makeUserFromRaw($usersRaw[$i]);
+			if(isset($_GET['type']))
+				$newUser = makeUserFromRaw($usersRaw[$i], $_GET['type']);
+			else
+				$newUser = makeUserFromRaw($usersRaw[$i]);
 			
 			array_push($users, $newUser);
 		}
@@ -66,7 +72,10 @@ else
 	{
 		for($i = 0; $i < count($usersRaw); $i++)
 		{
-			$newUser = makeUserFromRaw($usersRaw[$i]);
+			if(isset($_GET['type']))
+				$newUser = makeUserFromRaw($usersRaw[$i], $_GET['type']);
+			else
+				$newUser = makeUserFromRaw($usersRaw[$i]);
 			
 			if($newUser->UserId == $_GET["id"])
 				echo json_encode($newUser);

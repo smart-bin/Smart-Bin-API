@@ -7,6 +7,27 @@
 		header("Location: " . $page);
 		echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . $page . '">'; //failsafe
 	}
+	
+	function GetBinHistory($binId, $unixFrom = 0, $unixTo = 0)
+	{
+		$link = Connect();
+		
+		$sql = "SELECT * FROM `history` WHERE `binId`=$binId AND `unixStamp`>$unixFrom";
+		
+		if($unixTo > 0)
+			$sql .= " AND `unixStamp`<$unixTo";
+		
+		$result = mysqli_query($link, $sql); 
+		
+		if($result === false)
+			return null;
+		
+		$obj = mysqli_fetch_all($result); 
+
+		Disconnect($link);
+		
+		return $obj;
+	}
 
 	function StartSessionIfNeeded()
 	{
@@ -140,6 +161,36 @@
 			
 			$success = true;
 		}
+		
+		Disconnect($link);
+		
+		return $success;
+	}
+	
+	function RegisterNewBin($ownerId, $name, $type, $imageUrl)
+	{
+		$success = false;
+	
+		$link  = Connect();
+	
+		$sql = "INSERT INTO `bins` (ownerId, name, type, imageUrl) VALUES ('$ownerId', '$name', '$type', '$imageUrl')";
+
+		mysqli_query($link, $sql);
+		
+		Disconnect($link);
+		
+		return $success;
+	}
+	
+	function RegisterNewHistory($binId, $weight, $time)
+	{
+		$success = false;
+	
+		$link  = Connect();
+	
+		$sql = "INSERT INTO `history` (binId, weight, unixStamp) VALUES ('$binId', '$weight', '$time')";
+
+		mysqli_query($link, $sql);
 		
 		Disconnect($link);
 		

@@ -2,6 +2,7 @@
 
 class PointObject
 {
+	var $Waste = 0;
 	var $Plastic = 0;
 	var $Glass = 0;
 	var $Organic = 0;
@@ -11,6 +12,9 @@ class PointObject
 	
 	function RemoveNegative()
 	{
+		if($this->Waste < 0)
+			$this->Waste = 0;
+			
 		if($this->Plastic < 0)
 			$this->Plastic = 0;
 			
@@ -32,6 +36,9 @@ class PointObject
 	
 	function Add($other)
 	{
+		if(isset($other->Waste))
+			$this->Waste += (float)$other->Waste;
+	
 		if(isset($other->Plastic))
 			$this->Plastic += (float)$other->Plastic;
 		
@@ -53,6 +60,9 @@ class PointObject
 	
 	function AddFromArray($other)
 	{
+		if(isset($other["Waste"]))
+			$this->Waste += (float)$other["Waste"];
+	
 		if(isset($other["Plastic"]))
 			$this->Plastic += (float)$other["Plastic"];
 		

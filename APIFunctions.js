@@ -10,20 +10,31 @@ var API =
 		});
 	},
 	
-	registerNewBin: function (ownerId, name, type, onSuccess)
+	registerNewHistory: function (binId, weight, unixTimestamp, onSuccess)
 	{
-		$.post(this.apiBaseUrl + "users.php", {newBin:{Name:name, OwnerId:ownerId, Type:type}}).done(function(data){
+		$.post(this.apiBaseUrl + "history.php", {newStamp:{BinId:binId, Weight:weight, UnixTimestamp:unixTimestamp}}).done(function(data){
 			if (typeof onSuccess === "function")
 				onSuccess(data);
 		});
 	},
 	
-	getUser: function(userId, onSuccess)
+	registerNewBin: function (ownerId, name, type, onSuccess)
 	{
+		$.post(this.apiBaseUrl + "bins.php", {newBin:{Name:name, OwnerId:ownerId, Type:type}}).done(function(data){
+			if (typeof onSuccess === "function")
+				onSuccess(data);
+		});
+	},
+	
+	getUser: function(userId, type, onSuccess) //types: info, points, bins, full
+	{
+		if(type == null)
+			type = "info";
+	
 		return $.ajax({
 			dataType: "JSON",
 			method:"GET",
-			url: this.apiBaseUrl + "users.php?id=" + userId,
+			url: this.apiBaseUrl + "users.php?id=" + userId + "&type=" + type,
 			success: function(data)
 			{
 				if (typeof onSuccess === "function")
@@ -32,12 +43,15 @@ var API =
 		});
 	},
 	
-	getAllUsers: function(onSuccess)
+	getAllUsers: function(type, onSuccess) //types: info, points, bins, full
 	{
+		if(type == null)
+			type = "info";
+			
 		return $.ajax({
 			dataType: "JSON",
 			method:"GET",
-			url: this.apiBaseUrl + "users.php",
+			url: this.apiBaseUrl + "users.php" + "?type=" + type,
 			success: function(data)
 			{
 				if (typeof onSuccess === "function")
@@ -74,11 +88,26 @@ var API =
 		});
 	},
 	
-	updateBinWeight: function(id, weight, onSuccess)
+	getHistory: function(binId, unixFrom, unixTo, onSuccess)
 	{
-		$.post(this.apiBaseUrl + "updateBinWeight.php", {userId: id, newWeight: weight}).done(function(data){
-			if (typeof onSuccess === "function")
-				onSuccess(data);
+		if(binId == null)
+			return null;
+	
+		if(unixFrom == null)
+			unixFrom = 0;
+		
+		if(unixTo == null)
+			unixTo = 0;
+	
+		return $.ajax({
+			dataType: "JSON",
+			method:"GET",
+			url: this.apiBaseUrl + "history.php?id=" + binId + "&from=" + unixFrom + "&to=" + unixTo,
+			success: function(data)
+			{
+				if (typeof onSuccess === "function")
+					onSuccess(data);
+			}	
 		});
 	},
 	
