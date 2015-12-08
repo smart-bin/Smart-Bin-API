@@ -123,7 +123,7 @@
 		Email($newEmail, "robot@timfalken.com", "DnD Account", "Your info has been edited! Your new name is: " . $newName . ", your password is: " . $newPassword . ". Check all other stuff online on http://www.timfalken.com/dnd/");
 	}
 	
-	function AttemptLogin($email, $password)
+	function Login($email, $password)
 	{
 		StartSessionIfNeeded();
 	

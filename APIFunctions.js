@@ -1,7 +1,15 @@
 var API = 
 {
 	apiBaseUrl: "http://timfalken.com/hr/internetfornature/",
-
+	
+	login: function(email, password, onSuccess)
+	{
+		$.post(this.apiBaseUrl + "login.php", {Email:email, Password:password}).done(function(data){
+			if (typeof onSuccess === "function")
+				onSuccess(data);
+		});
+	},
+	
 	registerNewUser: function (name, email, password, onSuccess)
 	{
 		$.post(this.apiBaseUrl + "users.php", {newUser:{Name:name, Email:email, Password:password}}).done(function(data){

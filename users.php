@@ -36,7 +36,7 @@ if(isset($_POST["newUser"])) //Imporant: Keep same variable names as set in 'fun
 	
 	if($success)
 	{
-		$result = RegisterNewUser($newName, $newEmail, $newPassword);
+		$result = RegisterNewUser($newName, $newEmail, md5($newPassword));
 		
 		if($result === true)
 			echo '{"success":"User successfully registered"}';
