@@ -1,0 +1,3 @@
+Origin Text: "super secret admin password string for adding points to users"
+
+Token: 45f17b19ad5527e8bd6a0b749bf412ac

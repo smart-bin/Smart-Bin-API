@@ -74,7 +74,7 @@ var API =
 			dataType: "JSON",
 			method:"GET",
 			url: this.apiBaseUrl + "bins.php?id=" + binId,
-			success: function(data)
+			complete: function(data)
 			{
 				if (typeof onSuccess === "function")
 					onSuccess(data);
@@ -119,9 +119,17 @@ var API =
 		});
 	},
 	
-	awardPoints: function(id, pointObject, onSuccess)
+	awardPoints: function(id, pointObject, tokenStr, onSuccess)
 	{
-		$.post(this.apiBaseUrl + "awardPoints.php", {userId: id, points: pointObject}).done(function(data){
+		$.post(this.apiBaseUrl + "awardPoints.php", {userId: id, points: pointObject, token: tokenStr}).done(function(data){
+			if (typeof onSuccess === "function")
+				onSuccess(data);
+		});
+	},
+	
+	consumePoints: function(id, pointObject, tokenStr, onSuccess)
+	{
+		$.post(this.apiBaseUrl + "consumePoints.php", {userId: id, points: pointObject, token: tokenStr}).done(function(data){
 			if (typeof onSuccess === "function")
 				onSuccess(data);
 		});

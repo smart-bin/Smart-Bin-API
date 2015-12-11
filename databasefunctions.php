@@ -1,6 +1,7 @@
 <?php
 
 	class Collection{}
+	$masterToken = "45f17b19ad5527e8bd6a0b749bf412ac";
 
 	function NavigateToPage($page)
 	{
@@ -99,8 +100,10 @@
 	function EditBinWeight($id, $weight)
 	{
 		$link = Connect();
-	
-		$sql = "UPDATE `bins` SET `currentWeight` = '$weight' WHERE `id` = '$id';";
+		
+		$time = time();
+		
+		$sql = "INSERT INTO `history` (binId, weight, unixStamp) VALUES ('$id', '$weight', '$time')";
 		
 		mysqli_query($link, $sql);
 		
@@ -123,6 +126,24 @@
 		Email($newEmail, "robot@timfalken.com", "DnD Account", "Your info has been edited! Your new name is: " . $newName . ", your password is: " . $newPassword . ". Check all other stuff online on http://www.timfalken.com/dnd/");
 	}
 	
+	function VerifyToken($userId, $token)
+	{
+		StartSessionIfNeeded();
+	
+		$link = Connect();
+	
+		$result = mysqli_query($link, "SELECT * FROM `users` WHERE id='$userId'");
+
+		$user = mysqli_fetch_row($result);
+		
+		if($token == $user[3])
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
 	function Login($email, $password)
 	{
 		StartSessionIfNeeded();
@@ -136,9 +157,10 @@
 		if($password == $user[3])
 		{
 			$_SESSION["currentUser"] = $user;
+			return $user;
 		}
 		
-		return $user;
+		return false;
 	}
 	
 	function RegisterNewUser($username, $email, $password)

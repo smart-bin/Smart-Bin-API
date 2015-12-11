@@ -34,7 +34,7 @@ if($success)
 		echo json_encode($user);
 	}
 	else
-		echo json_encode(array("Error"=>$result));
+		echo json_encode(array("Error"=>"Username or password incorrect"));
 }
 else
 {
