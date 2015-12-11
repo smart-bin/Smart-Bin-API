@@ -8,8 +8,17 @@ function init()
 	
 	//API.getAllUsers("bins", function(data){console.log(data)});
 	
-	API.getBin(5, function(stuff){console.log(stuff);})
+	//API.getBin(5, function(stuff){console.log(stuff);})
 	
+	API.editCharge(3, 82, "45f17b19ad5527e8bd6a0b749bf412ac", function(stuff){console.log(stuff);});
+	API.editWeight(3, 9, "45f17b19ad5527e8bd6a0b749bf412ac", function(stuff){console.log(stuff);});
+	
+	API.editCharge(4, 55, "45f17b19ad5527e8bd6a0b749bf412ac", function(stuff){console.log(stuff);});
+	API.editWeight(4, 30, "45f17b19ad5527e8bd6a0b749bf412ac", function(stuff){console.log(stuff);});
+	API.editCharge(6, 30, "45f17b19ad5527e8bd6a0b749bf412ac", function(stuff){console.log(stuff);});
+	API.editWeight(6, 4, "45f17b19ad5527e8bd6a0b749bf412ac", function(stuff){console.log(stuff);});
+	API.editCharge(7, 60, "45f17b19ad5527e8bd6a0b749bf412ac", function(stuff){console.log(stuff);});
+	API.editWeight(7, 10, "45f17b19ad5527e8bd6a0b749bf412ac", function(stuff){console.log(stuff);});
 	/*var apiBaseUrl = "http://timfalken.com/hr/internetfornature/";
 	var binId = 1;
 	var weight = 3;

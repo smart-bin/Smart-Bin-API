@@ -1,5 +1,4 @@
-<?php
-header("Access-Control-Allow-Origin: *");
+<?php header("Access-Control-Allow-Origin: *");
 
 include "databasefunctions.php";
 include_once "bintypes.php";
@@ -14,15 +13,15 @@ if(isset($_POST["binId"]) && isset($_POST["newCharge"]) && isset($_POST["token"]
 	
 	if($_POST["token"] == $masterToken)
 	{
-		echo EditBinWeight($id, $weight);
-		echo json_encode("Success"=>"Charge updated successfully");
+		echo EditBinCharge($id, $weight);
+		echo json_encode(["Success"=>"Charge updated successfully"]);
 	}
 	else
 	{
-		echo json_encode("Error"=>"Invalid token given");
+		echo json_encode(["Error"=>"Invalid token given"]);
 	}
 }
 else
 {
-	echo json_encode("Error"=>"Missing Parameters. Required: (binId, newCharge, token)");
+	echo json_encode(["Error"=>"Missing Parameters. Required: (binId, newCharge, token)"]);
 }

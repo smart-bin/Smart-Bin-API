@@ -137,7 +137,7 @@ var API =
 	
 	editWeight: function(binId, weight, tokenStr, onSuccess)
 	{
-		$.post(this.apiBaseUrl + "updateBinWeight.php", {binId: id, newWeight: weight, token: tokenStr}).done(function(data){
+		$.post(this.apiBaseUrl + "updateBinWeight.php", {binId: binId, newWeight: weight, token: tokenStr}).done(function(data){
 			if (typeof onSuccess === "function")
 				onSuccess(data);
 		});
@@ -145,7 +145,7 @@ var API =
 	
 	editCharge: function(binId, charge, tokenStr, onSuccess)
 	{
-		$.post(this.apiBaseUrl + "updateBinCharge.php", {binId: id, newCharge: charge, token: tokenStr}).done(function(data){
+		$.post(this.apiBaseUrl + "updateBinCharge.php", {binId: binId, newCharge: charge, token: tokenStr}).done(function(data){
 			if (typeof onSuccess === "function")
 				onSuccess(data);
 		});

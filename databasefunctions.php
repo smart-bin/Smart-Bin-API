@@ -110,7 +110,7 @@
 		echo mysql_error();
 	}
 	
-	function EditBinBattery($idToEdit, $newCharge)
+	function EditBinCharge($idToEdit, $newCharge)
 	{
 		$link = Connect();
 	
