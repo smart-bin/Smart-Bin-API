@@ -133,5 +133,21 @@ var API =
 			if (typeof onSuccess === "function")
 				onSuccess(data);
 		});
+	},
+	
+	editWeight: function(binId, weight, tokenStr, onSuccess)
+	{
+		$.post(this.apiBaseUrl + "updateBinWeight.php", {binId: id, newWeight: weight, token: tokenStr}).done(function(data){
+			if (typeof onSuccess === "function")
+				onSuccess(data);
+		});
+	},
+	
+	editCharge: function(binId, charge, tokenStr, onSuccess)
+	{
+		$.post(this.apiBaseUrl + "updateBinCharge.php", {binId: id, newCharge: charge, token: tokenStr}).done(function(data){
+			if (typeof onSuccess === "function")
+				onSuccess(data);
+		});
 	}
 }

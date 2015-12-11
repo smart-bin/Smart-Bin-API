@@ -10,11 +10,11 @@ include "pointObject.php";
 if(isset($_POST["binId"]) && isset($_POST["newWeight"]) && isset($_POST["token"])) //Imporant: Keep same variable names as set in 'function makeUser()' so users know what to set.
 {
 	$id = $_POST["binId"];
-	$weight = $_POST["newWeight"];
+	$charge = $_POST["newWeight"];
 	
 	if($_POST["token"] == $masterToken)
 	{
-		echo EditBinWeight($id, $weight);
+		echo EditBinCharge($id, $charge);
 		echo json_encode("Success"=>"Weight updated successfully");
 	}
 	else

@@ -110,6 +110,17 @@
 		echo mysql_error();
 	}
 	
+	function EditBinBattery($idToEdit, $newCharge)
+	{
+		$link = Connect();
+	
+		$sql = "UPDATE `bins` SET `batteryCharge` = '$newCharge' WHERE `id` = '$idToEdit';";
+		
+		mysqli_query($link, $sql);
+		
+		echo mysql_error();
+	}
+	
 	function EditUserData($idToEdit, $newName, $newEmail, $newPassword, $thenLogin = true)
 	{
 		$link = Connect();

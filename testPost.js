@@ -8,6 +8,8 @@ function init()
 	
 	//API.getAllUsers("bins", function(data){console.log(data)});
 	
+	API.getBin(5, function(stuff){console.log(stuff);})
+	
 	/*var apiBaseUrl = "http://timfalken.com/hr/internetfornature/";
 	var binId = 1;
 	var weight = 3;
@@ -19,7 +21,7 @@ function init()
 			if (typeof onSuccess === "function")
 				onSuccess(data);
 		});*/
-	API.registerNewUser("TimsPointsTest", "Point@Test.com", "testin", function(data){console.log(data)});
+	//API.registerNewUser("TimsPointsTest", "Point@Test.com", "testin", function(data){console.log(data)});
 	/*$.post("users.php", {newUser:{Name:'Appel', Email:"Appel@appelland.com", Password:"123"}}).done(function(data){
 		$("#result").text(data);
 	});*/
