@@ -9,8 +9,7 @@ function makeBinFromRaw($binRaw)
 	$newBin->OwnerId = (int)$binRaw[1];
 	$newBin->Name = $binRaw[2];
 	$newBin->Type = $binTypes[$binRaw[3]];
-	$newBin->ImageUrl = $binRaw[4];
-	$newBin->BatteryLevel = (float)$binRaw[5];
+	$newBin->BatteryLevel = (float)$binRaw[4];
 	$newBin->CurrentWeight = 0;
 	
 	$history = GetBinHistory((int)$binRaw[0]);
