@@ -96,6 +96,11 @@ var API =
 		});
 	},
 	
+	getEntireHistory: function(binId, onSuccess)
+	{
+		return this.getHistory(binId, null, null, onSuccess);
+	},
+	
 	getHistory: function(binId, unixFrom, unixTo, onSuccess)
 	{
 		if(binId == null)
