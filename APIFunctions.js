@@ -51,6 +51,20 @@ var API =
 		});
 	},
 	
+	getBinTypes: function(onSuccess)
+	{
+		return $.ajax({
+			dataType: "JSON",
+			method:"GET",
+			url: this.apiBaseUrl + "getTypes.php",
+			success: function(data)
+			{
+				if (typeof onSuccess === "function")
+					onSuccess(data);
+			}	
+		});
+	},
+	
 	getAllUsers: function(type, onSuccess) //types: info, points, bins, full
 	{
 		if(type == null)
