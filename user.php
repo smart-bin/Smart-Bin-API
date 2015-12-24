@@ -1,7 +1,7 @@
 <?php
-function makeUserFromRaw($userRaw, $type = "info")
+function makeUserFromRaw($userRaw, $type = "info", $lang = "en")
 {
-	include "bintypes.php";
+	include_once "bintypes.php";
 	include_once "bin.php";
 	include_once "pointObject.php";
 	
@@ -42,7 +42,7 @@ function makeUserFromRaw($userRaw, $type = "info")
 		
 		for($b = 0; $b < count($binsRaw); $b++)
 		{
-			$newBin = makeBinFromRaw($binsRaw[$b]);
+			$newBin = makeBinFromRaw($binsRaw[$b], $lang);
 			array_push($newUser->Bins, $newBin);
 		}
 	}

@@ -2,8 +2,13 @@
 header("Access-Control-Allow-Origin: *");
 
 include "databasefunctions.php";
-include_once "bintypes.php";
 include "bin.php";
+
+$lang = "en";
+if(isset($_GET["lang"]))
+	$lang = $_GET["lang"];
+if(isset($_POST["lang"]))
+	$lang = $_POST["lang"];
 
 if(isset($_POST["newBin"])) //Imporant: Keep same variable names as set in 'function makeUser()' so users know what to set.
 {
@@ -56,7 +61,7 @@ else
 		
 		for($i = 0; $i < count($binsRaw); $i++)
 		{
-			$newBin = makeBinFromRaw($binsRaw[$i]);
+			$newBin = makeBinFromRaw($binsRaw[$i], $lang);
 				
 			array_push($bins, $newBin);
 		}
@@ -67,7 +72,7 @@ else
 	{
 		for($i = 0; $i < count($binsRaw); $i++)
 		{
-			$newBin = makeBinFromRaw($binsRaw[$i]);
+			$newBin = makeBinFromRaw($binsRaw[$i], $lang);
 			
 			if($newBin->BinId == $_GET["id"])
 				echo json_encode($newBin);

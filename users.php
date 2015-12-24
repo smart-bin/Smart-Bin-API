@@ -2,8 +2,13 @@
 header("Access-Control-Allow-Origin: *");
 
 include "databasefunctions.php";
-include_once "bintypes.php";
 include "user.php";
+
+$lang = "en";
+if(isset($_GET["lang"]))
+	$lang = $_GET["lang"];
+if(isset($_POST["lang"]))
+	$lang = $_POST["lang"];
 
 if(isset($_POST["newUser"])) //Imporant: Keep same variable names as set in 'function makeUser()' so users know what to set.
 {
@@ -59,9 +64,9 @@ else
 		for($i = 0; $i < count($usersRaw); $i++)
 		{
 			if(isset($_GET['type']))
-				$newUser = makeUserFromRaw($usersRaw[$i], $_GET['type']);
+				$newUser = makeUserFromRaw($usersRaw[$i], $_GET['type'], $lang);
 			else
-				$newUser = makeUserFromRaw($usersRaw[$i]);
+				$newUser = makeUserFromRaw($usersRaw[$i], "info", $lang);
 			
 			array_push($users, $newUser);
 		}
@@ -73,9 +78,9 @@ else
 		for($i = 0; $i < count($usersRaw); $i++)
 		{
 			if(isset($_GET['type']))
-				$newUser = makeUserFromRaw($usersRaw[$i], $_GET['type']);
+				$newUser = makeUserFromRaw($usersRaw[$i], $_GET['type'], $lang);
 			else
-				$newUser = makeUserFromRaw($usersRaw[$i]);
+				$newUser = makeUserFromRaw($usersRaw[$i], "info", $lang);
 			
 			if($newUser->UserId == $_GET["id"])
 				echo json_encode($newUser);

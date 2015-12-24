@@ -1,14 +1,14 @@
 <?php
-function makeBinFromRaw($binRaw)
+function makeBinFromRaw($binRaw, $lang = "en")
 {
-	include "bintypes.php";
+	include_once "bintypes.php";
 	include_once "databasefunctions.php";
 	
 	$newBin = new Collection();
 	$newBin->BinId = (int)$binRaw[0];
 	$newBin->OwnerId = (int)$binRaw[1];
 	$newBin->Name = $binRaw[2];
-	$newBin->Type = $binTypes[$binRaw[3]];
+	$newBin->Type = binTypes($binRaw[3], $lang);
 	$newBin->BatteryLevel = (float)$binRaw[4];
 	$newBin->CurrentWeight = 0;
 	
