@@ -1,6 +1,6 @@
 var API = 
 {
-	language = "en",
+	language: "en",
 	apiBaseUrl: "http://timfalken.com/hr/internetfornature/",
 	
 	login: function(email, password, onSuccess)
