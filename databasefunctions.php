@@ -190,9 +190,9 @@
 		{
 			mysqli_query($link, $sql);
 			
-			//EmailAccountData();
-			
-			$success = true;
+			$result = mysqli_query($link, "SELECT * FROM `users` WHERE email='$email'"); 
+		
+			$success = mysqli_fetch_row($result);
 		}
 		
 		Disconnect($link);
@@ -210,9 +210,13 @@
 
 		mysqli_query($link, $sql);
 		
+		$result = mysqli_query($link, "SELECT max(id) FROM `bins`"); 
+		$result = mysqli_fetch_row($result)[0];
+		$result = mysqli_query($link, "SELECT * FROM `bins` WHERE id='$result'"); 
+		
 		Disconnect($link);
 		
-		return $success;
+		return mysqli_fetch_row($result);
 	}
 	
 	function RegisterNewHistory($binId, $weight, $time)

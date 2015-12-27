@@ -4,6 +4,18 @@ include "localization.php";
 //Never use these as key values, as they are translated
 //according to user preferences. Always use their integer ID.
 
+class BinTypeAndIDPair
+{
+	var $TypeId = -1;
+	var $TypeName = "ERROR";
+	
+	function __construct($id, $name)
+	{
+		$this->TypeId = $id;
+		$this->TypeName = $name;
+	}	
+}
+
 function binTypes($id, $lang = "en")
 {
 	return allBinTypes($lang)[$id];

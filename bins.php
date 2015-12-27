@@ -41,9 +41,8 @@ if(isset($_POST["newBin"])) //Imporant: Keep same variable names as set in 'func
 	
 	if($success)
 	{
-		RegisterNewBin($newOwner, $newName, $newType);
-		
-		echo '{"success":"Bin successfully registered"}';
+		$bin = RegisterNewBin($newOwner, $newName, $newType);
+		echo json_encode(makeBinFromRaw($bin, $lang));
 	}
 	else
 	{

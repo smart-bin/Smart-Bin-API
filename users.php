@@ -44,7 +44,7 @@ if(isset($_POST["newUser"])) //Imporant: Keep same variable names as set in 'fun
 		$result = RegisterNewUser($newName, $newEmail, md5($newPassword));
 		
 		if($result === true)
-			echo '{"success":"User successfully registered"}';
+			echo json_encode(makeUserFromRaw($result, "info", $lang));
 		else
 			echo json_encode(array("Error"=>$result));
 	}
