@@ -17,7 +17,6 @@ if(isset($_POST["newBin"])) //Imporant: Keep same variable names as set in 'func
 	$newOwner = isset($data["OwnerId"])? $data["OwnerId"] : ""; //TODO change from usercode -> bincode
 	$newName = isset($data["Name"])? $data["Name"] : "";
 	$newType = isset($data["Type"])? $data["Type"] : "";
-	$newImage = isset($data["ImageUrl"])? $data["ImageUrl"] : "";
 	
 	$success = true;
 	$errors = [];
@@ -42,7 +41,7 @@ if(isset($_POST["newBin"])) //Imporant: Keep same variable names as set in 'func
 	
 	if($success)
 	{
-		RegisterNewBin($newOwner, $newName, $newType, $newImage);
+		RegisterNewBin($newOwner, $newName, $newType);
 		
 		echo '{"success":"Bin successfully registered"}';
 	}

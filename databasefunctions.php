@@ -200,13 +200,13 @@
 		return $success;
 	}
 	
-	function RegisterNewBin($ownerId, $name, $type, $imageUrl)
+	function RegisterNewBin($ownerId, $name, $type)
 	{
 		$success = false;
 	
 		$link  = Connect();
 	
-		$sql = "INSERT INTO `bins` (ownerId, name, type, imageUrl) VALUES ('$ownerId', '$name', '$type', '$imageUrl')";
+		$sql = "INSERT INTO `bins` (ownerId, name, type) VALUES ('$ownerId', '$name', '$type')";
 
 		mysqli_query($link, $sql);
 		
