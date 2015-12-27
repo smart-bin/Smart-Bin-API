@@ -43,10 +43,10 @@ if(isset($_POST["newUser"])) //Imporant: Keep same variable names as set in 'fun
 	{
 		$result = RegisterNewUser($newName, $newEmail, md5($newPassword));
 		
-		if($result === true)
+		if($result !== false)
 			echo json_encode(makeUserFromRaw($result, "info", $lang));
 		else
-			echo json_encode(array("Error"=>$result));
+			echo json_encode(array("Error"=>"User with this email already exists"));
 	}
 	else
 	{

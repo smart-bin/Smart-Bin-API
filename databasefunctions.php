@@ -206,7 +206,7 @@
 	
 		$link  = Connect();
 	
-		$sql = "INSERT INTO `bins` (ownerId, name, type) VALUES ('$ownerId', '$name', '$type')";
+		$sql = "INSERT INTO `bins` (ownerId, name, type, batteryCharge) VALUES ('$ownerId', '$name', '$type', '100')";
 
 		mysqli_query($link, $sql);
 		
