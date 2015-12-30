@@ -180,6 +180,8 @@
 	
 		$link  = Connect();
 	
+		$username = mysqli_escape_string($username);
+	
 		$sql = "INSERT INTO `users` (name, email, password) VALUES ('$username', '$email', '$password')";
 
 		$result = mysqli_query($link, "SELECT * FROM `users` WHERE email='$email'"); 
@@ -205,7 +207,9 @@
 		$success = false;
 	
 		$link  = Connect();
-	
+		
+		$name = mysqli_escape_string($name);
+		
 		$sql = "INSERT INTO `bins` (ownerId, name, type, batteryCharge) VALUES ('$ownerId', '$name', '$type', '100')";
 
 		mysqli_query($link, $sql);

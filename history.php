@@ -53,11 +53,13 @@ else
 	
 		$history = [];
 		
+		$returnObject = new Collection();
+		
 		for($i = 0; $i < count($histRaw); $i++)
 		{
 			$newHist = new Collection();
 			
-			$newHist->BinID = (int)$histRaw[$i][1];
+			$newHist->BinId = (int)$histRaw[$i][1];
 			$newHist->Weight = (int)$histRaw[$i][2];
 			$newHist->UnixTimestamp = (int)$histRaw[$i][3];
 			$newHist->Date = date("Y-m-d", $histRaw[$i][3]);
@@ -65,8 +67,11 @@ else
 			
 			array_push($history, $newHist);
 		}
-
-		echo json_encode($history);
+		
+		$returnObject->BinId = (int)$_GET["id"];
+		$returnObject->History = $history;
+		
+		echo json_encode($returnObject);
 	}
 	else
 	{
