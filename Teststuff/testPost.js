@@ -10,7 +10,7 @@ function init()
 	
 	//API.getBin(5, function(stuff){console.log(stuff);})
 	
-	API.editCharge(3, 82, "45f17b19ad5527e8bd6a0b749bf412ac", function(stuff){console.log(stuff);});
+	/*API.editCharge(3, 82, "45f17b19ad5527e8bd6a0b749bf412ac", function(stuff){console.log(stuff);});
 	API.editWeight(3, 9, "45f17b19ad5527e8bd6a0b749bf412ac", function(stuff){console.log(stuff);});
 	
 	API.editCharge(4, 55, "45f17b19ad5527e8bd6a0b749bf412ac", function(stuff){console.log(stuff);});
@@ -18,7 +18,7 @@ function init()
 	API.editCharge(6, 30, "45f17b19ad5527e8bd6a0b749bf412ac", function(stuff){console.log(stuff);});
 	API.editWeight(6, 4, "45f17b19ad5527e8bd6a0b749bf412ac", function(stuff){console.log(stuff);});
 	API.editCharge(7, 60, "45f17b19ad5527e8bd6a0b749bf412ac", function(stuff){console.log(stuff);});
-	API.editWeight(7, 10, "45f17b19ad5527e8bd6a0b749bf412ac", function(stuff){console.log(stuff);});
+	API.editWeight(7, 10, "45f17b19ad5527e8bd6a0b749bf412ac", function(stuff){console.log(stuff);});*/
 	/*var apiBaseUrl = "http://timfalken.com/hr/internetfornature/";
 	var binId = 1;
 	var weight = 3;
@@ -30,7 +30,7 @@ function init()
 			if (typeof onSuccess === "function")
 				onSuccess(data);
 		});*/
-	//API.registerNewUser("TimsPointsTest", "Point@Test.com", "testin", function(data){console.log(data)});
+	API.registerNewUser("TimsEs;capeTest", "third@Test.com", "testin", function(data){console.log(data)});
 	/*$.post("users.php", {newUser:{Name:'Appel', Email:"Appel@appelland.com", Password:"123"}}).done(function(data){
 		$("#result").text(data);
 	});*/

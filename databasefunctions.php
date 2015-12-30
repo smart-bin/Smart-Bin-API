@@ -179,9 +179,9 @@
 		$success = false;
 	
 		$link  = Connect();
-	
-		$username = mysqli_escape_string($username);
-	
+		
+		$username = htmlentities($username);
+			
 		$sql = "INSERT INTO `users` (name, email, password) VALUES ('$username', '$email', '$password')";
 
 		$result = mysqli_query($link, "SELECT * FROM `users` WHERE email='$email'"); 
@@ -208,7 +208,7 @@
 	
 		$link  = Connect();
 		
-		$name = mysqli_escape_string($name);
+		$name = htmlentities($name);
 		
 		$sql = "INSERT INTO `bins` (ownerId, name, type, batteryCharge) VALUES ('$ownerId', '$name', '$type', '100')";
 
