@@ -75,6 +75,47 @@ else
 	}
 	else
 	{
-		echo json_encode(array("error" => "No id given"));
+		$histRaw = GetAllBinHistory(isset($_GET["from"])? $_GET["from"] : 0, isset($_GET["to"])? $_GET["to"] : 0);
+	
+		$history = [];
+		
+		$returnObject = new Collection();
+		$returnObject->BinHistories = array();
+		
+		for($i = 0; $i < count($histRaw); $i++)
+		{	
+			$newHist = new Collection();
+			
+			$newHist->BinId = (int)$histRaw[$i][1];
+			$newHist->Weight = (int)$histRaw[$i][2];
+			$newHist->UnixTimestamp = (int)$histRaw[$i][3];
+			$newHist->Date = date("Y-m-d", $histRaw[$i][3]);
+			$newHist->Time = date("H:i:s", $histRaw[$i][3]);
+			
+			$makeNew = true;
+			
+			for($h = 0; $h < count($returnObject->BinHistories); $h++)
+			{
+				if($returnObject->BinHistories[$h]->BinID == (int)$histRaw[$i][1])
+				{
+					$makeNew = false;
+					array_push($returnObject->BinHistories[$h]->History, $newHist);
+				}
+			}
+			
+			if($makeNew)
+			{
+				$newHistContainer = new Collection();
+				$newHistContainer->BinID = (int)$histRaw[$i][1];
+				$newHistContainer->History = [$newHist];
+				
+				array_push($returnObject->BinHistories, $newHistContainer);
+			}
+		}
+		
+		$returnObject->UnixFrom = isset($_GET["from"])? $_GET["from"] : 0;
+		$returnObject->UnixTo = isset($_GET["to"])? $_GET["to"] : 0;
+		
+		echo json_encode($returnObject);
 	}
 }

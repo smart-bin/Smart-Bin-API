@@ -22,7 +22,7 @@ function makeUserFromRaw($userRaw, $type = "info", $lang = "en")
 	
 	if($type == "info" || $type == "full")
 	{
-		$newUser->Name = html_entity_decode($userRaw[1]);
+		$newUser->Name = html_entity_decode($userRaw[1], ENT_QUOTES);
 		$newUser->Email = $userRaw[3];
 	}
 	

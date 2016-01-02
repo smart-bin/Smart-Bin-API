@@ -29,6 +29,27 @@
 		
 		return $obj;
 	}
+	
+	function GetAllBinHistory($binId, $unixFrom = 0, $unixTo = 0)
+	{
+		$link = Connect();
+		
+		$sql = "SELECT * FROM `history` WHERE `unixStamp`>$unixFrom";
+		
+		if($unixTo > 0)
+			$sql .= " AND `unixStamp`<$unixTo";
+		
+		$result = mysqli_query($link, $sql); 
+		
+		if($result === false)
+			return null;
+		
+		$obj = mysqli_fetch_all($result); 
+
+		Disconnect($link);
+		
+		return $obj;
+	}
 
 	function StartSessionIfNeeded()
 	{
@@ -180,7 +201,7 @@
 	
 		$link  = Connect();
 		
-		$username = htmlentities($username);
+		$username = htmlentities(strip_tags($username), ENT_QUOTES);
 			
 		$sql = "INSERT INTO `users` (name, email, password) VALUES ('$username', '$email', '$password')";
 
@@ -208,7 +229,7 @@
 	
 		$link  = Connect();
 		
-		$name = htmlentities($name);
+		$name = htmlentities(strip_tags($name), ENT_QUOTES);
 		
 		$sql = "INSERT INTO `bins` (ownerId, name, type, batteryCharge) VALUES ('$ownerId', '$name', '$type', '100')";
 

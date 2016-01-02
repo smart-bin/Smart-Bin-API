@@ -111,6 +111,26 @@ var API =
 		});
 	},
 	
+	getGlobalHistory: function(unixFrom, unixTo, onSuccess)
+	{
+		if(unixFrom == null)
+			unixFrom = 0;
+		
+		if(unixTo == null)
+			unixTo = 0;
+	
+		return $.ajax({
+			dataType: "JSON",
+			method:"GET",
+			url: this.apiBaseUrl + "history.php?from=" + unixFrom + "&to=" + unixTo,
+			success: function(data)
+			{
+				if (typeof onSuccess === "function")
+					onSuccess(data);
+			}	
+		});
+	},
+	
 	getEntireHistory: function(binId, onSuccess)
 	{
 		return this.getHistory(binId, null, null, onSuccess);

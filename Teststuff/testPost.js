@@ -30,7 +30,7 @@ function init()
 			if (typeof onSuccess === "function")
 				onSuccess(data);
 		});*/
-	API.registerNewUser("TimsEs;capeTest", "third@Test.com", "testin", function(data){console.log(data)});
+	API.registerNewBin(2, "Tim's Weirdest Bin", 1, function(data){console.log(data)});
 	/*$.post("users.php", {newUser:{Name:'Appel', Email:"Appel@appelland.com", Password:"123"}}).done(function(data){
 		$("#result").text(data);
 	});*/
