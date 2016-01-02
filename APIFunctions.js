@@ -131,12 +131,12 @@ var API =
 		});
 	},
 	
-	getEntireHistory: function(binId, onSuccess)
+	getEntireHistory: function(binIds, onSuccess)
 	{
-		return this.getHistory(binId, null, null, onSuccess);
+		return this.getHistory(binIds, null, null, onSuccess);
 	},
 	
-	getHistoryBundle: function(binIds, unixFrom, unixTo, onSuccess)
+	getHistory: function(binIds, unixFrom, unixTo, onSuccess)
 	{
 		if(binIds == null)
 			return null;
@@ -147,40 +147,10 @@ var API =
 		if(unixTo == null)
 			unixTo = 0;
 			
-		var idString = "?id[]=" + binIds[0];
-		
-		for(var i = 1; i < binIds.Length; i++)
-		{
-			idString += "&id[]=" + binIds[i];
-		}
-	
 		return $.ajax({
 			dataType: "JSON",
 			method:"GET",
-			url: this.apiBaseUrl + "history.php" + idString + "&from=" + unixFrom + "&to=" + unixTo,
-			success: function(data)
-			{
-				if (typeof onSuccess === "function")
-					onSuccess(data);
-			}	
-		});
-	},
-	
-	getHistory: function(binId, unixFrom, unixTo, onSuccess)
-	{
-		if(binId == null)
-			return null;
-	
-		if(unixFrom == null)
-			unixFrom = 0;
-		
-		if(unixTo == null)
-			unixTo = 0;
-	
-		return $.ajax({
-			dataType: "JSON",
-			method:"GET",
-			url: this.apiBaseUrl + "history.php?id=" + binId + "&from=" + unixFrom + "&to=" + unixTo,
+			url: this.apiBaseUrl + "history.php" + "?id[]=" + binIds.join("&id[]=") + "&from=" + unixFrom + "&to=" + unixTo,
 			success: function(data)
 			{
 				if (typeof onSuccess === "function")
