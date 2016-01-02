@@ -30,6 +30,35 @@
 		return $obj;
 	}
 	
+	function GetBundledBinHistory($binIds, $unixFrom = 0, $unixTo = 0)
+	{
+		$link = Connect();
+		
+		$idstring = "";
+		
+		for($i = 0; $i < count($binIds); $i++)
+		{
+			$more = ($i+1) < count($binIds);
+			$idstring .= "`binId`=" . $binIds[$i] . ($more? " OR" : "");
+		}
+		
+		$sql = "SELECT * FROM `history` WHERE (" . $idstring . ") AND `unixStamp`>$unixFrom";
+		 
+		if($unixTo > 0)
+			$sql .= " AND `unixStamp`<$unixTo";
+		
+		$result = mysqli_query($link, $sql); 
+		
+		if($result === false)
+			return null;
+		
+		$obj = mysqli_fetch_all($result); 
+
+		Disconnect($link);
+		
+		return $obj;
+	}
+	
 	function GetAllBinHistory($binId, $unixFrom = 0, $unixTo = 0)
 	{
 		$link = Connect();
