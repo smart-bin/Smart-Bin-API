@@ -13,8 +13,8 @@ if(isset($_POST["binId"]) && isset($_POST["newWeight"]) && isset($_POST["token"]
 	
 	if($_POST["token"] == $masterToken)
 	{
-		echo EditBinWeight($id, $charge);
-		echo json_encode(["Success"=>"Weight updated successfully"]);
+		$points = EditBinWeight($id, $charge);
+		echo json_encode(["Success"=>"Weight updated successfully", "awardedPoints" => $points]);
 	}
 	else
 	{

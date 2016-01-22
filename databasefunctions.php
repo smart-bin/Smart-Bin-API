@@ -149,6 +149,14 @@
 	
 	function EditBinWeight($id, $weight)
 	{
+		include_once "exchangeRates.php";
+		include_once "pointObject.php";
+		include_once "bin.php";
+		
+		$binOld = makeBinFromRaw(GetBin($id), "en");
+		$oldWeight = $binOld->CurrentWeight;
+		$weightDiff = max(0, $weight - $oldWeight);
+		
 		$link = Connect();
 		
 		$time = time();
@@ -157,7 +165,55 @@
 		
 		mysqli_query($link, $sql);
 		
-		echo mysql_error();
+		$bin = GetBin($id);
+		$typeId = (int)$bin[3];
+		$typeName = binTypes($bin[3], "en");
+		// award points
+		
+		$toAward = new PointObject();
+		
+		$points = array();
+		
+		switch($typeName)
+		{
+			case "Waste": 
+				$toAward->Waste = $weightDiff * getExchangeRates()->waste; 
+				break;
+			case "Plastic": 
+				$toAward->Plastic = $weightDiff * getExchangeRates()->plastic; 
+				break;
+			case "Glass": 
+				$toAward->Glass = $weightDiff * getExchangeRates()->glass; 
+				break;
+			case "Organic": 
+				$toAward->Organic = $weightDiff * getExchangeRates()->organic; 
+				break;
+			case "Tin": 
+				$toAward->Tin = $weightDiff * getExchangeRates()->tin; 
+				break;
+			case "Paper": 
+				$toAward->Paper = $weightDiff * getExchangeRates()->paper; 
+				break;
+			case "Chemical": 
+				$toAward->Chemical = $weightDiff * getExchangeRates()->chemical; 
+				break;
+		}
+		
+		$userId = (int)$bin[1];
+		$user = makeUserFromRaw(GetUser($userId), "full");
+		
+		$newPoints = new PointObject();
+		
+		$newPoints->Add($user->Points);
+		$newPoints->Add($toAward);
+		
+		$user->Points = $newPoints;
+		$user->Points->RemoveNegative();
+		
+		EditUserPoints($user->UserId, json_encode($user->Points));
+		//
+		
+		return $toAward;
 	}
 	
 	function EditBinCharge($idToEdit, $newCharge)
@@ -329,7 +385,7 @@
 	{
 		$link = Connect();
 		
-		$result = mysqli_query($link, "SELECT * FROM `bins` WHERE `id`=$userId"); 
+		$result = mysqli_query($link, "SELECT * FROM `bins` WHERE `id`=$binId"); 
 		
 		$obj = mysqli_fetch_row($result); 
 

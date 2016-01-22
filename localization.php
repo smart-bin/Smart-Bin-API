@@ -1,6 +1,4 @@
 <?php
-
-
 function GetLocalized($stringName, $lang) //stringName corresponds to variable name in LocalizationBundle
 {
 	//build localization bundles here

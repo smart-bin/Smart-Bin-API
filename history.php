@@ -75,15 +75,45 @@ else
 	}
 	else
 	{
-		if(isset($_GET["id"]) && is_array($_GET["id"]))
-			$histRaw = GetBundledBinHistory($_GET["id"], isset($_GET["from"])? $_GET["from"] : 0, isset($_GET["to"])? $_GET["to"] : 0);
-		else
-			$histRaw = GetAllBinHistory(isset($_GET["from"])? $_GET["from"] : 0, isset($_GET["to"])? $_GET["to"] : 0);
-	
 		$history = [];
 		
 		$returnObject = new Collection();
+		
+		$returnObject->UnixFrom = isset($_GET["from"])? $_GET["from"] : 0;
+		$returnObject->UnixTo = isset($_GET["to"])? $_GET["to"] : 0;
+		
 		$returnObject->BinHistories = array();
+	
+		if(isset($_GET["id"]) && is_array($_GET["id"]))
+		{
+			$histRaw = GetBundledBinHistory($_GET["id"], isset($_GET["from"])? $_GET["from"] : 0, isset($_GET["to"])? $_GET["to"] : 0);
+			
+			$noDuplicates = array();
+			
+			for($i = 0; $i < count($_GET["id"]); $i++)
+			{	
+				$add = true;
+				
+				for($i2=0; $i2 < count($noDuplicates); $i2++)
+				{
+					if($noDuplicates[$i2] == $_GET["id"][$i])
+						$ad = false;
+				}
+				
+				if($add)
+				{
+					$newHistContainer = new Collection();
+					$newHistContainer->BinId = (int)$_GET["id"][$i];
+					$newHistContainer->History = array();
+					
+					array_push($noDuplicates, $_GET["id"][$i]);
+					array_push($returnObject->BinHistories, $newHistContainer);
+				}
+			}
+		}
+		else
+			$histRaw = GetAllBinHistory(isset($_GET["from"])? $_GET["from"] : 0, isset($_GET["to"])? $_GET["to"] : 0);
+	
 		
 		for($i = 0; $i < count($histRaw); $i++)
 		{	
@@ -115,9 +145,6 @@ else
 				array_push($returnObject->BinHistories, $newHistContainer);
 			}
 		}
-		
-		$returnObject->UnixFrom = isset($_GET["from"])? $_GET["from"] : 0;
-		$returnObject->UnixTo = isset($_GET["to"])? $_GET["to"] : 0;
 		
 		if(isset($_GET["id"]) && is_array($_GET["id"]))
 		{
